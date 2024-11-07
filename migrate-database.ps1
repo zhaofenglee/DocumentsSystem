@@ -1,0 +1,1 @@
+dotnet run --project JS.DocumentsSystem --migrate-database
