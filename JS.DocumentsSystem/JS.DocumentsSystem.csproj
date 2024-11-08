@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
 
   <ItemGroup>
@@ -97,6 +98,9 @@
 
   <ItemGroup>
     <Content Remove="Localization\DocumentsSystem\*.json" />
+    <Content Include="..\.dockerignore">
+      <Link>.dockerignore</Link>
+    </Content>
     <EmbeddedResource Include="Localization\DocumentsSystem\*.json" />
   </ItemGroup>
 
