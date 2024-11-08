@@ -1,3 +1,4 @@
+using JS.DocumentsSystem.Components.MyFooter;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic.Bundling;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic;
 ﻿using Microsoft.AspNetCore.Extensions.DependencyInjection;
@@ -17,6 +18,7 @@ using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic.Bundling;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared;
+using Volo.Abp.AspNetCore.Mvc.UI.Theming;
 using Volo.Abp.AspNetCore.Serilog;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.Autofac;
@@ -48,6 +50,7 @@ using Volo.Abp.TenantManagement.EntityFrameworkCore;
 using Volo.Abp.TenantManagement.Web;
 using Volo.Abp.OpenIddict;
 using Volo.Abp.Security.Claims;
+using Volo.Abp.Ui.LayoutHooks;
 using Volo.Abp.UI.Navigation;
 using Volo.Abp.UI.Navigation.Urls;
 using Volo.Abp.Validation.Localization;
@@ -192,6 +195,13 @@ public class DocumentsSystemModule : AbpModule
             options.RoutePrefix = "docs";
             options.SingleProjectMode.Enable = true;
             options.SingleProjectMode.ProjectName = "abp";
+        });
+
+        context.Services.Configure<AbpLayoutHookOptions>(options =>
+        {
+            options.Add(LayoutHooks.Body.Last, 
+                typeof(MyFooterViewComponent),
+                layout: StandardLayouts.Empty);
         });
     }
 
