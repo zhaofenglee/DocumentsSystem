@@ -1,0 +1,15 @@
+FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS base
+EXPOSE 8080
+EXPOSE 443
+COPY bin/Release/net9.0/publish/ app/
+WORKDIR /app
+
+FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
+WORKDIR /src
+RUN dotnet dev-certs https -v -ep openiddict.pfx -p 183f30b0-ff76-4354-b3f9-16902eb710a1
+
+FROM base AS final
+WORKDIR /app
+COPY --from=build /src .
+
+ENTRYPOINT ["dotnet", "JS.DocumentsSystem.dll"]
